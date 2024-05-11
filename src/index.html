@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Cropper</title>
+</head>
+<style>
+    input[type="file"], button {
+        display: block;
+    }
+</style>
+<body>
+    <input type="file" name="file" id="file" accept='image/*' />
+    <script src="./index.js"></script>
+    <script>
+        var reader = new FileReader;
+        let inputElem = document.getElementById('file');
+        let img;
+        if (inputElem) {
+            inputElem.addEventListener('input', (e) => {
+                if ('files' in e.target) {
+                    reader.readAsDataURL(e.target.files[0]);
+                }
+            });
+        }
+
+        reader.onload = function() {
+            img = new Image;
+            img.src = reader.result;
+            addImageToCanvas(img);
+        }
+    </script>
+    <noscript>Enable JS</noscript>
+    <button id='freeze'>Freeze</button>
+</body>
+</html>
